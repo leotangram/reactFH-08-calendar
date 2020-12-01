@@ -10,9 +10,14 @@ import { uiOpenModal } from '../../actions/ui'
 import Navbar from '../ui/Navbar'
 import CalendarEvent from './CalendarEvent'
 import CalendarModal from './CalendarModal'
-import { eventClearActiveNote, eventSetActive } from '../../actions/events'
+import {
+  eventClearActiveNote,
+  eventSetActive,
+  eventStartLoading
+} from '../../actions/events'
 import AddNewFab from '../ui/AddNewFab'
 import DeleteEventFab from '../ui/DeleteEventFab'
+import { useEffect } from 'react'
 
 const localizer = momentLocalizer(moment)
 
@@ -23,6 +28,10 @@ const CalendarScreen = () => {
   const [lastView, setLastView] = useState(
     localStorage.getItem('lastView') || 'month'
   )
+
+  useEffect(() => {
+    dispatch(eventStartLoading())
+  }, [dispatch])
 
   const onDoubleClick = e => {
     console.log('onDoubleClick: ', e)
