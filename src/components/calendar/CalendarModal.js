@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { uiCloseModal } from '../../actions/ui'
 import {
-  eventAddNew,
   eventClearActiveNote,
+  eventStartAddNew,
   eventUpdated
 } from '../../actions/events'
 
@@ -100,16 +100,7 @@ const CalendarModal = props => {
     if (activeEvent) {
       dispatch(eventUpdated(formValues))
     } else {
-      dispatch(
-        eventAddNew({
-          ...formValues,
-          id: new Date().getTime(),
-          user: {
-            _id: '123',
-            name: 'Fernando'
-          }
-        })
-      )
+      dispatch(eventStartAddNew(formValues))
     }
 
     setTitleValid(true)
